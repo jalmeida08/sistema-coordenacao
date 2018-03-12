@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-@Entity
+@Entity(name="pessoa")
 public abstract class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = -7845503815781776248L;
