@@ -6,10 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
-@Entity
+@Entity(name = "usuario")
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = -2500244136796891393L;
@@ -21,6 +22,7 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	@OneToOne(orphanRemoval = false)
+	@JoinColumn(name = "idPessoa", insertable = false, updatable = false)
 	private Pessoa pessoa;
 
 	@Version
