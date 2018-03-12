@@ -1,7 +1,9 @@
 package br.com.jsa.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,6 +35,9 @@ public abstract class Pessoa implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idPessoa")
 	private Usuario usuario;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval=true)
+	private List<Telefone> telefone = new ArrayList<Telefone>();
 
 	@Version
 	private Long versao;
