@@ -42,11 +42,6 @@
 			<version>5.2.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
-			<version>5.2.1.Final</version>
-		</dependency>
 
 		<!-- JSF -->
 		<dependency>
