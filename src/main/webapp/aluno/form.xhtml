@@ -31,12 +31,11 @@
 					itemLabel="#{tipoTelefone.descricaoTipoTelefone}" 
 					itemValue="#{tipoTelefone}"/>
 			</p:selectOneMenu>
-			<p:commandButton action="#{alunoBean.adicionarTelefone()}" value="Adicionar" update="@form"/>
-			
+			<p:commandButton  value="Adicionar" action="#{alunoBean.adicionarTelefone}" update="@form tabelaTelefones"/>
 			<p:commandButton action="#{alunoBean.salvar()}" value="Salvar" update="@form"/>
 			
 		</h:panelGrid>
-			<p:dataTable var="telefone" value="#{alunoBean.telefones}">
+			<p:dataTable var="telefone" value="#{alunoBean.telefones}" id="tabelaTelefones" emptyMessage="Não á telefones cadastrado">
 				<p:column headerText="DDD">
 					<p:outputLabel value="#{telefone.ddd}" />
 				</p:column>
@@ -45,6 +44,14 @@
 				</p:column>
 				<p:column headerText="Tipo">
 					<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
+				</p:column>
+				<p:column headerText="#">
+					<p:commandButton icon="ui-icon-trash">
+						<p:ajax event="click" listener="#{alunoBean.removerTelefoneList(telefone)}" update="tabelaTelefones" />
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil">
+						<p:ajax event="click" listener="#{alunoBean.capturarTelefoneList(telefone)}" update="@form tabelaTelefones" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 	</h:form>

@@ -60,6 +60,5 @@ public class TipoTelefone implements Serializable{
 	public void setVersao(Long versao) {
 		this.versao = versao;
 	}
-	
-	
+
 }

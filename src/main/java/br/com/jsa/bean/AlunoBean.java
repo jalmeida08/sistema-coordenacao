@@ -16,10 +16,10 @@ import br.com.jsa.service.TipoTelefoneService;
 
 @Named
 @SessionScoped
-public class AlunoBean implements Serializable{
+public class AlunoBean implements Serializable {
 
 	private static final long serialVersionUID = 8738805493610514548L;
-	
+
 	@Inject
 	private AlunoService alunoService;
 	@Inject
@@ -36,13 +36,30 @@ public class AlunoBean implements Serializable{
 	}
 
 	public void adicionarTelefone() {
-		telefones.add(telefone);
-		telefone = new Telefone();
+		if(telefone.getTipoTelefone() != null) {
+			if(telefones.contains(telefone)) {
+				telefones.remove(telefone);
+				telefones.add(telefone);
+			}else {
+				telefones.add(telefone);
+			}
+			telefone = new Telefone();
+		}
 	}
-	
+
+	public void removerTelefoneList(Telefone telefone) {
+		telefones.remove(telefone);
+	}
+
+	public void capturarTelefoneList(Telefone telefone) {
+		this.telefone = telefone;
+		//telefones.remove(telefone);
+	}
+
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
+
 
 	public List<TipoTelefone> getListaTipoTelefones() {
 		listaTipoTelefones = tipoTelefoneService.buscarTodos();
