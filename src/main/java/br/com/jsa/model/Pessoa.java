@@ -32,11 +32,11 @@ public abstract class Pessoa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "idPessoa")
 	private Usuario usuario;
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="pessoa",cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Telefone> telefone = new ArrayList<Telefone>();
 
 	@Version
@@ -81,5 +81,15 @@ public abstract class Pessoa implements Serializable {
 	public void setVersao(Long versao) {
 		this.versao = versao;
 	}
+
+	public List<Telefone> getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(List<Telefone> telefone) {
+		this.telefone = telefone;
+	}
+	
+	
 
 }

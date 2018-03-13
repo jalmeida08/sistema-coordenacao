@@ -26,6 +26,7 @@ public class Telefone implements Serializable {
 	private Pessoa pessoa;
 
 	@ManyToOne
+	@JoinColumn(name="idTipoTelefone")
 	private TipoTelefone tipoTelefone;
 
 	@Version

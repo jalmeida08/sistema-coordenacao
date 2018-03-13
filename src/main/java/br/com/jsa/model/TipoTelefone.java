@@ -16,8 +16,6 @@ public class TipoTelefone implements Serializable{
 
 	private static final long serialVersionUID = 614070448101148255L;
 	
-	public TipoTelefone() {}
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idTipoTelefone;

@@ -1,6 +1,7 @@
 package br.com.jsa.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -25,11 +26,22 @@ public class AlunoBean implements Serializable{
 	private TipoTelefoneService tipoTelefoneService;
 	@Inject
 	private Aluno aluno;
+	@Inject
 	private Telefone telefone;
+	private List<Telefone> telefones = new ArrayList<Telefone>();
 	private List<TipoTelefone> listaTipoTelefones;
 
 	public Aluno getAluno() {
 		return aluno;
+	}
+
+	public void adicionarTelefone() {
+		telefones.add(telefone);
+		telefone = new Telefone();
+	}
+	
+	public List<Telefone> getTelefones() {
+		return telefones;
 	}
 
 	public List<TipoTelefone> getListaTipoTelefones() {
@@ -41,8 +53,15 @@ public class AlunoBean implements Serializable{
 		return telefone;
 	}
 
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
+	}
+
 	public String salvar() {
-		alunoService.salvar(aluno);
+		aluno.setTelefone(telefones);
+		alunoService.salvarAluno(aluno);
+		aluno = new Aluno();
+		telefones = new ArrayList<Telefone>();
 		return "form?faces-redirect=true";
 	}
 }

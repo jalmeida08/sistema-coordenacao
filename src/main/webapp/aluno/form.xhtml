@@ -17,7 +17,13 @@
 			<p:inputText id="nome" value="#{alunoBean.aluno.nome}" />
 
 			<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
-			<p:calendar id="dtNascimento" value="#{alunoBean.aluno.dataNascimento}" />
+			<p:calendar id="dtNascimento" value="#{alunoBean.aluno.dataNascimento}" pattern="dd/MM/yyyy"/>
+			
+			<p:outputLabel for="ddd" value="DDD:" />
+			<p:inputText id="ddd" value="#{alunoBean.telefone.ddd}" />
+			
+			<p:outputLabel for="numero" value="Número:" />
+			<p:inputText id="numero" value="#{alunoBean.telefone.numero}" />
 			
 			<p:outputLabel for="tipoTelefone" value="Tipo de telefone:" />
 			<p:selectOneMenu id="tipoTelefone" value="#{alunoBean.telefone.tipoTelefone}" converter="#{tipoTelefoneConverter}">
@@ -25,9 +31,22 @@
 					itemLabel="#{tipoTelefone.descricaoTipoTelefone}" 
 					itemValue="#{tipoTelefone}"/>
 			</p:selectOneMenu>
-
-			<p:commandButton action="#{alunoBean.salvar()}" value="Salvar" />
+			<p:commandButton action="#{alunoBean.adicionarTelefone()}" value="Adicionar" update="@form"/>
+			
+			<p:commandButton action="#{alunoBean.salvar()}" value="Salvar" update="@form"/>
+			
 		</h:panelGrid>
+			<p:dataTable var="telefone" value="#{alunoBean.telefones}">
+				<p:column headerText="DDD">
+					<p:outputLabel value="#{telefone.ddd}" />
+				</p:column>
+				<p:column headerText="Número">
+					<p:outputLabel value="#{telefone.numero}" />
+				</p:column>
+				<p:column headerText="Tipo">
+					<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
+				</p:column>
+			</p:dataTable>
 	</h:form>
 </h:body>
 </html>
