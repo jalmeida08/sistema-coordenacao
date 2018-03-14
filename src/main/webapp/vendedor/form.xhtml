@@ -9,62 +9,108 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:messages autoUpdate="true" showDetail="true" closable="true" />
-		<h:panelGrid columns="2">
-			<p:outputLabel for="nome" value="Nome Completo:" />
-			<p:inputText id="nome" value="#{vendedorBean.vendedor.nome}" />
-
-			<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
-			<p:calendar id="dtNascimento" value="#{vendedorBean.vendedor.dataNascimento}" />
+		<p:panel header="Vendedor">
+			<p:messages autoUpdate="true" showDetail="true" closable="true" />
+			<div class="ui-g">
+		    	<div class="ui-g-12 ui-md-6 ui-lg-12">
+					<p:fieldset legend="Dados Pessoais">
+						<h:panelGrid columns="2" >
+							<p:outputLabel for="nome" value="Nome Completo:" />
+							<p:inputText id="nome" value="#{vendedorBean.vendedor.nome}" />
+				
+							<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
+							<p:calendar id="dtNascimento" value="#{vendedorBean.vendedor.dataNascimento}"  />
+						</h:panelGrid>
+					</p:fieldset>
+				</div>
+			</div>
+			<div class="ui-g">
+		    	<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:fieldset legend="Usuário">
+						<h:panelGrid columns="2">	
+							
+							<p:outputLabel for="email" value="E-mail" />
+							<p:inputText id="email" value="#{vendedorBean.usuario.email}"/>
 			
-			<p:outputLabel for="email" value="E-mail" />
-			<p:inputText id="email" value="#{vendedorBean.usuario.email}"/>
-			
-			<p:outputLabel for="permissao" value="Permissões" />
-			<p:selectOneMenu id="permissao" value="#{vendedorBean.usuario.permissao}" converter="#{permissaoConverter}">
-				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-				<f:selectItems var="permissao" value="#{vendedorBean.listaPermissoes}" 
-					itemLabel="#{permissao.descricao}" 
-					itemValue="#{permissao}" />
-			</p:selectOneMenu>
-			
-			<p:outputLabel for="ddd" value="DDD" />
-			<p:inputText id="ddd" value="#{vendedorBean.telefone.ddd}"/>
-			
-			<p:outputLabel for="numero" value="Número" />
-			<p:inputText id="numero" value="#{vendedorBean.telefone.numero}"/>
-
-			<p:outputLabel for="tipoTelefone" value="Tipo de telefone" />
-			
-			<p:selectOneMenu id="tipoTelefone" value="#{vendedorBean.telefone.tipoTelefone}" converter="#{tipoTelefoneConverter}">
-				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-				<f:selectItems var="tipoTelefone" value="#{vendedorBean.listaTipoTelefones}" 
-					itemLabel="#{tipoTelefone.descricaoTipoTelefone}" 
-					itemValue="#{tipoTelefone}" />
-			</p:selectOneMenu>
-			
-			<p:commandButton action="#{vendedorBean.adicionarTelefone()}" value="Adicionar" update="@form tabelaTelefones"/>
-			<p:commandButton action="#{vendedorBean.salvar()}" value="Salvar" update="@form"/>
-		</h:panelGrid>
-		<p:dataTable var="telefone" value="#{vendedorBean.telefones}" id="tabelaTelefones" emptyMessage="Não á telefones cadastrado">
-				<p:column headerText="DDD">
-					<p:outputLabel value="#{telefone.ddd}" />
-				</p:column>
-				<p:column headerText="Número">
-					<p:outputLabel value="#{telefone.numero}" />
-				</p:column>
-				<p:column headerText="Tipo">
-					<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
-				</p:column>
-				<p:column headerText="#">
-					<p:commandButton icon="ui-icon-trash">
-						<p:ajax event="click" listener="#{vendedorBean.removerTelefoneList(telefone)}" update="tabelaTelefones" />
-					</p:commandButton>
-					<p:commandButton icon="ui-icon-pencil">
-						<p:ajax event="click" listener="#{vendedorBean.capturarTelefoneList(telefone)}" update="@form tabelaTelefones" />
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
+							<p:outputLabel for="permissao" value="Permissões" /> 
+							<p:selectOneMenu id="permissao" value="#{vendedorBean.permissao}">
+								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+								<f:selectItems var="permissao" value="#{vendedorBean.listaPermissoes}" 
+												itemLabel="#{permissao.descricao}" 
+												itemValue="#{permissao}" />
+							</p:selectOneMenu>
+							<p:commandButton icon="ui-icon-plus" action="#{vendedorBean.adicionarPermissao}" update="@form tabelaPermissao"/>
+						</h:panelGrid>
+					</p:fieldset>	
+		    	</div>
+		    	<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:dataTable var="permissao" value="#{vendedorBean.permissoes}" id="tabelaPermissao"
+							emptyMessage="Este usuário não possuí permissões até agora">
+								<f:facet name="header">
+									<p:outputLabel value="Lista de permissões" />
+								</f:facet>
+								<p:column headerText="Tipo">
+									<p:outputLabel value="#{permissao.descricao}" />
+								</p:column>
+								<p:column headerText="#">
+									<p:commandButton icon="ui-icon-trash">
+										<p:ajax event="click" listener="#{vendedorBean.removerTelefoneList(telefone)}" update="tabelaTelefones" />
+									</p:commandButton>
+									<p:commandButton icon="ui-icon-pencil">
+										<p:ajax event="click" listener="#{vendedorBean.capturarTelefoneList(telefone)}" update="@form tabelaTelefones" />
+									</p:commandButton>
+								</p:column>
+						</p:dataTable>
+	    			</div>
+	    	</div>
+			<div class="ui-g">
+				<p:fieldset legend="Contato">
+		    		<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<h:panelGrid columns="2">	
+							<p:outputLabel for="ddd" value="DDD" />
+							<p:inputText id="ddd" value="#{vendedorBean.telefone.ddd}"/>
+							
+							<p:outputLabel for="numero" value="Número" />
+							<p:inputText id="numero" value="#{vendedorBean.telefone.numero}"/>
+							<p:outputLabel for="tipoTelefone" value="Tipo de telefone" />
+							<p:selectOneMenu id="tipoTelefone" value="#{vendedorBean.telefone.tipoTelefone}" converter="#{tipoTelefoneConverter}">
+								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+								<f:selectItems var="tipoTelefone" value="#{vendedorBean.listaTipoTelefones}" 
+									itemLabel="#{tipoTelefone.descricaoTipoTelefone}" 
+									itemValue="#{tipoTelefone}" />
+							</p:selectOneMenu>
+							
+							<p:commandButton action="#{vendedorBean.adicionarTelefone()}" value="Adicionar" update="@form tabelaTelefones"/>
+							<p:commandButton action="#{vendedorBean.salvar()}" value="Salvar" update="@form"/>
+						</h:panelGrid>
+					</div>
+			    	<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:dataTable var="telefone" value="#{vendedorBean.telefones}" id="tabelaTelefones" emptyMessage="Não á telefones cadastrado">
+								<f:facet name="header">
+									<p:outputLabel value="Lista de telefones" />
+								</f:facet>
+								<p:column headerText="DDD">
+									<p:outputLabel value="#{telefone.ddd}" />
+								</p:column>
+								<p:column headerText="Número">
+									<p:outputLabel value="#{telefone.numero}" />
+								</p:column>
+								<p:column headerText="Tipo">
+									<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
+								</p:column>
+								<p:column headerText="#">
+									<p:commandButton icon="ui-icon-trash">
+										<p:ajax event="click" listener="#{vendedorBean.removerTelefoneList(telefone)}" update="tabelaTelefones" />
+									</p:commandButton>
+									<p:commandButton icon="ui-icon-pencil">
+										<p:ajax event="click" listener="#{vendedorBean.capturarTelefoneList(telefone)}" update="@form tabelaTelefones" />
+									</p:commandButton>
+								</p:column>
+						</p:dataTable>
+	    			</div>
+				</p:fieldset>
+	    	</div>
+	    </p:panel>
 	</h:form>
 </h:body>
 </html>

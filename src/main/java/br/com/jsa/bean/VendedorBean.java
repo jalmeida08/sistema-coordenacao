@@ -37,11 +37,13 @@ public class VendedorBean implements Serializable{
 	private Usuario usuario;
 	@Inject
 	private Telefone telefone;
+	@Inject
+	private Permissao permissao;
 	private FacesContext context;
 	private List<Telefone> telefones = new ArrayList<Telefone>();
 	private List<Permissao> permissoes = new ArrayList<Permissao>();;
-	private List<TipoTelefone> listaTipoTelefones;
-	private List<Permissao> listaPermissoes;
+	private List<TipoTelefone> listaTipoTelefones = new ArrayList<TipoTelefone>();
+	private List<Permissao> listaPermissoes = new ArrayList<Permissao>();
 
 	
 	public void adicionarTelefone() {
@@ -52,6 +54,11 @@ public class VendedorBean implements Serializable{
 			telefones.add(telefone);
 			telefone = new Telefone();
 		}
+	}
+	
+	public void adicionarPermissao() {
+		permissoes.add(permissao);
+		permissao = new Permissao();
 	}
 	
 	public void removerTelefoneList(Telefone telefone) {
@@ -66,6 +73,10 @@ public class VendedorBean implements Serializable{
 		return vendedor;
 	}
 	
+	public Permissao getPermissao() {
+		return permissao;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
