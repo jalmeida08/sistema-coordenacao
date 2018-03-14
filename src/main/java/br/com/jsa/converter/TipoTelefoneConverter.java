@@ -18,7 +18,11 @@ public class TipoTelefoneConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
 		if(value != null) {
-			return tipoTelefoneService.getTipoTelefone(Integer.valueOf(value));
+			try{
+				return tipoTelefoneService.getTipoTelefone(Integer.valueOf(value));
+			}catch (NumberFormatException e) {
+				return null;
+			}
 		}
 		return null;
 	}

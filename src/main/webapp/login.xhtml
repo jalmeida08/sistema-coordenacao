@@ -11,13 +11,13 @@
 <h:body>
 	<h:form>
 		<h:panelGrid columns="2">
-			<p:outputLabel for="nome" value="Nome Completo:" />
-			<p:inputText id="nome" value="#{vendedorBean.vendedor.nome}" />
+			<p:outputLabel for="email" value="E-mail:" />
+			<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
 
-			<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
-			<p:inputText id="dtNascimento" value="#{vendedorBean.vendedor.dataNascimento}" />
+			<p:outputLabel for="senha" value="Data de nascimento:" />
+			<p:password id="senha" value="#{usuarioBean.usuario.senha}" />
 
-			<p:commandButton action="#{vendedorBean.salvar()}" value="Salvar" />
+			<p:commandButton action="#{usuarioBean.logar()}" value="logar" />
 		</h:panelGrid>
 	</h:form>
 </h:body>

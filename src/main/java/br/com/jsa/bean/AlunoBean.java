@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -44,6 +46,9 @@ public class AlunoBean implements Serializable {
 				telefones.add(telefone);
 			}
 			telefone = new Telefone();
+		}else {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta", "Escolha um tipo de telefone"));
 		}
 	}
 
