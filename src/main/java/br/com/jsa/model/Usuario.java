@@ -2,12 +2,14 @@ package br.com.jsa.model;
 
 import java.io.Serializable;
 import java.security.MessageDigest;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
@@ -23,9 +25,12 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	@OneToOne(orphanRemoval = false)
-	@JoinColumn(name = "idPessoa", insertable = false, updatable = false)
+	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
 
+	@ManyToMany(mappedBy="usuario")
+	private List<Permissao> permissao;
+	
 	@Version
 	private Long versao;
 
@@ -71,6 +76,22 @@ public class Usuario implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public List<Permissao> getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(List<Permissao> permissao) {
+		this.permissao = permissao;
+	}
+
+	public Long getVersao() {
+		return versao;
+	}
+
+	public void setVersao(Long versao) {
+		this.versao = versao;
 	}
 
 }

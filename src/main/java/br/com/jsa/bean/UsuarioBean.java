@@ -1,5 +1,7 @@
 package br.com.jsa.bean;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -11,16 +13,22 @@ import br.com.jsa.service.UsuarioService;
 
 @Named(value="usuarioBean")
 @SessionScoped
-public class UsuarioBean {
+public class UsuarioBean implements Serializable{
 
+	private static final long serialVersionUID = -813274541784078383L;
+	
 	@Inject
 	private UsuarioService usuarioService;
 	@Inject
 	private Usuario usuario;
-	private FacesContext context = FacesContext.getCurrentInstance();
+	private FacesContext context;
 	
 	public Usuario getUsuario() {
 		return usuario;
+	}
+	
+	public void limpar() {
+		usuario = new Usuario();
 	}
 	
 	public void salvar() {

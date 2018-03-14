@@ -10,14 +10,16 @@
 </h:head>
 <h:body>
 	<h:form>
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="1" cellpadding="-10">
 			<p:outputLabel for="email" value="E-mail:" />
 			<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
 
-			<p:outputLabel for="senha" value="Data de nascimento:" />
+			<p:outputLabel for="senha" value="Senha:" />
 			<p:password id="senha" value="#{usuarioBean.usuario.senha}" />
-
-			<p:commandButton action="#{usuarioBean.logar()}" value="logar" />
+		</h:panelGrid>
+		<h:panelGrid columns="2" cellpadding="">
+			<p:commandButton action="#{usuarioBean.login()}" value="logar" />
+			<p:commandButton action="#{usuarioBean.limpar()}" value="Limpar" />
 		</h:panelGrid>
 	</h:form>
 </h:body>

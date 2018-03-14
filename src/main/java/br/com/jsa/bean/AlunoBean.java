@@ -38,17 +38,17 @@ public class AlunoBean implements Serializable {
 	}
 
 	public void adicionarTelefone() {
-		if(telefone.getTipoTelefone() != null) {
-			if(telefones.contains(telefone)) {
+		if (telefone.getTipoTelefone() != null) {
+			if (telefones.contains(telefone)) {
 				telefones.remove(telefone);
 				telefones.add(telefone);
-			}else {
-				telefones.add(telefone);
 			}
+			telefones.add(telefone);
 			telefone = new Telefone();
-		}else {
+		} else {
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta", "Escolha um tipo de telefone"));
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta", "Escolha um tipo de telefone"));
 		}
 	}
 
@@ -58,13 +58,12 @@ public class AlunoBean implements Serializable {
 
 	public void capturarTelefoneList(Telefone telefone) {
 		this.telefone = telefone;
-		//telefones.remove(telefone);
+		// telefones.remove(telefone);
 	}
 
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
-
 
 	public List<TipoTelefone> getListaTipoTelefones() {
 		listaTipoTelefones = tipoTelefoneService.buscarTodos();

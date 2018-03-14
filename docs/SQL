@@ -1,0 +1,7 @@
+drop database sistema_coordenacao; create database sistema_coordenacao; use sistema_coordenacao;
+show tables;
+insert into tipoTelefone (descricaoTipoTelefone, versao) values ("Residencial", 0), ("Celular", 0), ("Trabalho", 0);
+insert into permissao ( descricao, versao ) values ("administrador", 0), ("vendedor", 0), ("financeiro",0), ("coordenador",0), ("aluno", 0);
+select * from tipoTelefone;
+select * from permissao;
+

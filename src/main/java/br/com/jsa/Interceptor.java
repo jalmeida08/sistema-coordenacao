@@ -20,7 +20,7 @@ public class Interceptor implements PhaseListener {
 
 	    System.out.println(nomePagina);
 
-	    if ("/login.xhtml".equals(nomePagina) || nomePagina.equals("usuarioCadastro.xhtml")) {
+	    if ("/login.xhtml".equals(nomePagina) || nomePagina.equals("usuarioCadastro.xhtml") || nomePagina.equals("/vendedor/form.xhtml")) {
 	        return;
 	    }
 
