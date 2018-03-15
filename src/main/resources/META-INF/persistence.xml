@@ -3,12 +3,20 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-	<persistence-unit name="sistemaCoordenacao" transaction-type="JTA">
+	<persistence-unit name="sistemaCoordenacao"
+		transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/sistemaCoordenacaoDS</jta-data-source>
-		
+
+		<class>br.com.jsa.model.Pessoa</class>
+		<class>br.com.jsa.model.Vendedor</class>
+		<class>br.com.jsa.model.Aluno</class>
+		<class>br.com.jsa.model.Usuario</class>
 		<class>br.com.jsa.model.Permissao</class>
-		
+		<class>br.com.jsa.model.Professor</class>
+		<class>br.com.jsa.model.Telefone</class>
+		<class>br.com.jsa.model.TipoTelefone</class>
+
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="connection.driver_class" value="com.mysql.jdbc.Driver" />

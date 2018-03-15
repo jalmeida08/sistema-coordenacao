@@ -44,7 +44,7 @@ public class UsuarioBean implements Serializable{
 		}
 		context.getExternalContext().getSessionMap().put("usuarioLogado", usuario);
 		
-		return "despesa?faces-redirect=true";
+		return "home?faces-redirect=true";
 	}
 	
 	

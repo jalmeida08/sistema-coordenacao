@@ -17,7 +17,7 @@ public class UsuarioRepository {
 
 	public Usuario logar(Usuario usuario) {
 		try{
-			return manager.createQuery("select u from Usuario u where u.email = :email and u.senha = :senha", Usuario.class)
+			return manager.createQuery("select u from br.com.jsa.model.Usuario u where u.email = :email and u.senha = :senha", Usuario.class)
 				.setParameter("email", usuario.getEmail())
 				.setParameter("senha", usuario.getSenha())
 				.getSingleResult();
