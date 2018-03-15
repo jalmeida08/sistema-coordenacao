@@ -34,7 +34,6 @@ public class PermissaoConverter implements Converter{
 		if(value != null) {
 			Permissao permissao = (Permissao) value;
 			if(permissao.getDescricao() != null) {
-				System.out.println("________________________________"+ permissao.getDescricao());
 				return permissao.getIdPermissao().toString();
 			}
 		}

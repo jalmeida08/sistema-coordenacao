@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 
 	private String email;
 	private String senha;
-
+	private boolean senhaAleatoria;
 	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
@@ -74,6 +74,14 @@ public class Usuario implements Serializable {
 			
 		}
 
+	}
+
+	public boolean isSenhaAleatoria() {
+		return senhaAleatoria;
+	}
+
+	public void setSenhaAleatoria(boolean senhaAleatoria) {
+		this.senhaAleatoria = senhaAleatoria;
 	}
 
 	public Pessoa getPessoa() {

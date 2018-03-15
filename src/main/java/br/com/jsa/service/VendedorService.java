@@ -7,6 +7,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+import br.com.jsa.EnviarEmailDePrimeiroAcesso;
+import br.com.jsa.GerarSenhas;
 import br.com.jsa.model.Vendedor;
 import br.com.jsa.repository.VendedorRepository;
 
@@ -15,19 +17,31 @@ public class VendedorService {
 
 	@Inject
 	private VendedorRepository vendedorRepository;
-	
+
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Vendedor getVendedor(Long idVendedor) {
 		return vendedorRepository.getVendedor(idVendedor);
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void salvar(Vendedor vendedor) {
+
+		String senha = GerarSenhas.getRandomPassword();
+		vendedor.getUsuario().setSenha(senha);
+		vendedor.getUsuario().setSenhaAleatoria(true);
+
+		EnviarEmailDePrimeiroAcesso enviarEmail = new EnviarEmailDePrimeiroAcesso(vendedor.getUsuario().getEmail(),
+				senha);
+
+		if (enviarEmail.enviar() == false) {
+			throw new RuntimeException("Erro ai enviar o e-mail");
+		}
 		vendedorRepository.salvar(vendedor);
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<Vendedor> buscarTodosVendedores(){
+	public List<Vendedor> buscarTodosVendedores() {
 		return vendedorRepository.buscarTodosVendedores();
 	}
+
 }
