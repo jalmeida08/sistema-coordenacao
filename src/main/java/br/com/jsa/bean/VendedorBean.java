@@ -59,10 +59,14 @@ public class VendedorBean implements Serializable{
 	public void adicionarPermissao() {
 		permissoes.add(permissao);
 		permissao = new Permissao();
+		
 	}
 	
 	public void removerTelefoneList(Telefone telefone) {
 		telefones.remove(telefone);
+	}
+	public void removerPermissao(Permissao permissao) {
+		permissoes.remove(permissao);
 	}
 	
 	public void capturarTelefoneList(Telefone telefone){
@@ -75,6 +79,10 @@ public class VendedorBean implements Serializable{
 	
 	public Permissao getPermissao() {
 		return permissao;
+	}
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
 	}
 
 	public Usuario getUsuario() {
@@ -104,12 +112,14 @@ public class VendedorBean implements Serializable{
 	}
 
 	public String salvar() {
+		usuario.setPermissao(permissoes);
 		vendedor.setUsuario(usuario);
 		vendedor.setTelefone(telefones);
 		vendedorService.salvar(vendedor);
 		vendedor = new Vendedor();
 		telefones = new ArrayList<Telefone>();
 		usuario = new Usuario();
+		permissoes = new ArrayList<Permissao>();
 		context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Salvo com sucesso"));
 		return "form?faces-redirect=true";

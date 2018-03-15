@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
@@ -28,7 +31,10 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
 
-	@ManyToMany(mappedBy="usuario")
+	@ManyToMany
+	@JoinTable(name="usuario_permissao",
+		joinColumns = {@JoinColumn(name="idUsuario", referencedColumnName="idUsuario")},
+		inverseJoinColumns = {@JoinColumn (name="idPermissao", referencedColumnName="idPermissao")})
 	private List<Permissao> permissao;
 	
 	@Version

@@ -6,7 +6,9 @@
 	<persistence-unit name="sistemaCoordenacao" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/sistemaCoordenacaoDS</jta-data-source>
-
+		
+		<class>br.com.jsa.model.Permissao</class>
+		
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="connection.driver_class" value="com.mysql.jdbc.Driver" />

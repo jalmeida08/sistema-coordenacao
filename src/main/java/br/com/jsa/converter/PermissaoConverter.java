@@ -30,10 +30,13 @@ public class PermissaoConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
-		Permissao permissao = null;
+		
 		if(value != null) {
-			permissao = (Permissao) value;
-			return permissao.getIdPermissao().toString();
+			Permissao permissao = (Permissao) value;
+			if(permissao.getDescricao() != null) {
+				System.out.println("________________________________"+ permissao.getDescricao());
+				return permissao.getIdPermissao().toString();
+			}
 		}
 		
 		return null;

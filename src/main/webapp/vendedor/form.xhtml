@@ -33,18 +33,19 @@
 							<p:inputText id="email" value="#{vendedorBean.usuario.email}"/>
 			
 							<p:outputLabel for="permissao" value="Permissões" /> 
-							<p:selectOneMenu id="permissao" value="#{vendedorBean.permissao}">
+							<p:selectOneMenu id="permissao" value="#{vendedorBean.permissao}"
+								converter="#{permissaoConverter}">
 								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 								<f:selectItems var="permissao" value="#{vendedorBean.listaPermissoes}" 
 												itemLabel="#{permissao.descricao}" 
 												itemValue="#{permissao}" />
 							</p:selectOneMenu>
-							<p:commandButton icon="ui-icon-plus" action="#{vendedorBean.adicionarPermissao}" update="@form tabelaPermissao"/>
+							<p:commandButton icon="ui-icon-plus" action="#{vendedorBean.adicionarPermissao}" update="@form"/>
 						</h:panelGrid>
 					</p:fieldset>	
 		    	</div>
 		    	<div class="ui-g-12 ui-md-6 ui-lg-6">
-						<p:dataTable var="permissao" value="#{vendedorBean.permissoes}" id="tabelaPermissao"
+						<p:dataTable var="permissao" value="#{vendedorBean.permissoes}"
 							emptyMessage="Este usuário não possuí permissões até agora">
 								<f:facet name="header">
 									<p:outputLabel value="Lista de permissões" />
@@ -54,10 +55,7 @@
 								</p:column>
 								<p:column headerText="#">
 									<p:commandButton icon="ui-icon-trash">
-										<p:ajax event="click" listener="#{vendedorBean.removerTelefoneList(telefone)}" update="tabelaTelefones" />
-									</p:commandButton>
-									<p:commandButton icon="ui-icon-pencil">
-										<p:ajax event="click" listener="#{vendedorBean.capturarTelefoneList(telefone)}" update="@form tabelaTelefones" />
+										<p:ajax event="click" listener="#{vendedorBean.removerPermissao(permissao)}" update="@form" />
 									</p:commandButton>
 								</p:column>
 						</p:dataTable>
@@ -80,12 +78,12 @@
 									itemValue="#{tipoTelefone}" />
 							</p:selectOneMenu>
 							
-							<p:commandButton action="#{vendedorBean.adicionarTelefone()}" value="Adicionar" update="@form tabelaTelefones"/>
+							<p:commandButton action="#{vendedorBean.adicionarTelefone()}" value="Adicionar" update="@form"/>
 							<p:commandButton action="#{vendedorBean.salvar()}" value="Salvar" update="@form"/>
 						</h:panelGrid>
 					</div>
 			    	<div class="ui-g-12 ui-md-6 ui-lg-6">
-						<p:dataTable var="telefone" value="#{vendedorBean.telefones}" id="tabelaTelefones" emptyMessage="Não á telefones cadastrado">
+						<p:dataTable var="telefone" value="#{vendedorBean.telefones}" emptyMessage="Não á telefones cadastrado">
 								<f:facet name="header">
 									<p:outputLabel value="Lista de telefones" />
 								</f:facet>
@@ -99,11 +97,11 @@
 									<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
 								</p:column>
 								<p:column headerText="#">
-									<p:commandButton icon="ui-icon-trash">
-										<p:ajax event="click" listener="#{vendedorBean.removerTelefoneList(telefone)}" update="tabelaTelefones" />
-									</p:commandButton>
 									<p:commandButton icon="ui-icon-pencil">
-										<p:ajax event="click" listener="#{vendedorBean.capturarTelefoneList(telefone)}" update="@form tabelaTelefones" />
+										<p:ajax event="click" listener="#{vendedorBean.capturarTelefoneList(telefone)}" update="@form" />
+									</p:commandButton>
+									<p:commandButton icon="ui-icon-trash">
+										<p:ajax event="click" listener="#{vendedorBean.removerTelefoneList(telefone)}" update="@form" />
 									</p:commandButton>
 								</p:column>
 						</p:dataTable>
