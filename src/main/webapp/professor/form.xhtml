@@ -1,61 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
 </h:head>
 <h:body>
 	<h:form>
-		<p:messages autoUpdate="true" showDetail="true" closable="true"/>
-		<h:panelGrid columns="2">
-			<p:outputLabel for="nome" value="Nome Completo:" />
-			<p:inputText id="nome" value="#{professorBean.professor.nome}" />
-
-			<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
-			<p:calendar id="dtNascimento" value="#{professorBean.professor.dataNascimento}" pattern="dd/MM/yyyy"/>
+		<p:panel header="Vendedor">
+			<p:messages autoUpdate="true" showDetail="true" closable="true" />
+			<div class="ui-g">
+		    	<div class="ui-g-12 ui-md-6 ui-lg-12">
+					<p:fieldset legend="Dados Pessoais">
+						<h:panelGrid columns="2" >
+							<p:outputLabel for="nome" value="Nome Completo:" />
+							<p:inputText id="nome" value="#{professorBean.professor.nome}" />
+				
+							<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
+							<p:calendar id="dtNascimento" value="#{professorBean.professor.dataNascimento}"  />
+						</h:panelGrid>
+					</p:fieldset>
+				</div>
+			</div>
+			<div class="ui-g">
+		    	<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:fieldset legend="Usuário">
+						<h:panelGrid columns="2">	
+							
+							<p:outputLabel for="email" value="E-mail" />
+							<p:inputText id="email" value="#{professorBean.usuario.email}"/>
 			
-			<p:outputLabel for="ddd" value="DDD:" />
-			<p:inputText id="ddd" value="#{professorBean.telefone.ddd}" />
-			
-			<p:outputLabel for="numero" value="Número:" />
-			<p:inputText id="numero" value="#{professorBean.telefone.numero}" />
-			
-			<p:outputLabel for="tipoTelefone" value="Tipo de telefone:" />
-			<p:selectOneMenu id="tipoTelefone" value="#{professorBean.telefone.tipoTelefone}" converter="#{tipoTelefoneConverter}">
-				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-				<f:selectItems var="tipoTelefone" value="#{professorBean.listaTipoTelefones}"
-					itemLabel="#{tipoTelefone.descricaoTipoTelefone}" 
-					itemValue="#{tipoTelefone}" />
-			</p:selectOneMenu>
-			<p:commandButton  value="Adicionar" action="#{professorBean.adicionarTelefone}" update="@form"/>
-			<p:commandButton action="#{professorBean.salvar()}" value="Salvar" update="@form"/>
-			
-		</h:panelGrid>
-			<p:dataTable var="telefone" value="#{professorBean.telefones}" emptyMessage="Não á telefones cadastrado">
-				<p:column headerText="DDD">
-					<p:outputLabel value="#{telefone.ddd}" />
-				</p:column>
-				<p:column headerText="Número">
-					<p:outputLabel value="#{telefone.numero}" />
-				</p:column>
-				<p:column headerText="Tipo">
-					<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
-				</p:column>
-				<p:column headerText="#">
-					<p:commandButton icon="ui-icon-trash">
-						<p:ajax event="click" listener="#{professorBean.removerTelefoneList(telefone)}" update="@form" />
-					</p:commandButton>
-					<p:commandButton icon="ui-icon-pencil">
-						<p:ajax event="click" listener="#{professorBean.capturarTelefoneList(telefone)}" update="@form" /> 
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
+						</h:panelGrid>
+					</p:fieldset>	
+		    	</div>
+	    	</div>
+			<div class="ui-g">
+				<p:fieldset legend="Contato">
+		    		<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<h:panelGrid columns="2">	
+							<p:outputLabel for="ddd" value="DDD" />
+							<p:inputText id="ddd" value="#{professorBean.telefone.ddd}"/>
+							
+							<p:outputLabel for="numero" value="Número" />
+							<p:inputText id="numero" value="#{professorBean.telefone.numero}"/>
+							<p:outputLabel for="tipoTelefone" value="Tipo de telefone" />
+							<p:selectOneMenu id="tipoTelefone" value="#{professorBean.telefone.tipoTelefone}" converter="#{tipoTelefoneConverter}">
+								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+								<f:selectItems var="tipoTelefone" value="#{professorBean.listaTipoTelefones}" 
+									itemLabel="#{tipoTelefone.descricaoTipoTelefone}" 
+									itemValue="#{tipoTelefone}" />
+							</p:selectOneMenu>
+							 
+							<p:commandButton action="#{professorBean.adicionarTelefone()}" value="Adicionar" update="@form"/>
+							<p:commandButton action="#{professorBean.salvar()}" value="Salvar" update="@form"/>
+						</h:panelGrid>
+					</div>
+			    	<div class="ui-g-12 ui-md-6 ui-lg-6">
+						<p:dataTable var="telefone" value="#{professorBean.telefones}" emptyMessage="Não á telefones cadastrado">
+								<f:facet name="header">
+									<p:outputLabel value="Lista de telefones" />
+								</f:facet>
+								<p:column headerText="DDD">
+									<p:outputLabel value="#{telefone.ddd}" />
+								</p:column>
+								<p:column headerText="Número">
+									<p:outputLabel value="#{telefone.numero}" />
+								</p:column>
+								<p:column headerText="Tipo">
+									<p:outputLabel value="#{telefone.tipoTelefone.descricaoTipoTelefone}" />
+								</p:column>
+								<p:column headerText="#">
+									<p:commandButton icon="ui-icon-pencil">
+										<p:ajax event="click" listener="#{professorBean.capturarTelefoneList(telefone)}" update="@form" />
+									</p:commandButton>
+									<p:commandButton icon="ui-icon-trash">
+										<p:ajax event="click" listener="#{professorBean.removerTelefoneList(telefone)}" update="@form" />
+									</p:commandButton>
+								</p:column>
+						</p:dataTable>
+	    			</div>
+				</p:fieldset>
+	    	</div>
+	    </p:panel>
 	</h:form>
 </h:body>
 </html>

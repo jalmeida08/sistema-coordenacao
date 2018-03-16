@@ -1,6 +1,7 @@
 package br.com.jsa.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -38,15 +39,20 @@ public class ProfessorBean implements Serializable{
 	private Telefone telefone;
 	@Inject
 	private TipoTelefone tipoTelefone;
-	private List<Telefone> telefones;
+	private List<Telefone> telefones = new ArrayList<Telefone>();
 	private List<Permissao> permissoes;
 	private List<Permissao> listaPermissao;
-	private List<TipoTelefone> listaTipoTelefone;
+	private List<TipoTelefone> listaTipoTelefones;
 	
 	public Professor getProfessor() {
 		return professor;
 	}
 
+	public void adicionarTelefone(){
+		telefones.add(telefone);
+		telefone = new Telefone();
+	}
+	
 	public void capturarTelefoneList(Telefone telefone){
 		this.telefone = telefone;
 	}
@@ -88,9 +94,9 @@ public class ProfessorBean implements Serializable{
 		return listaPermissao;
 	}
 
-	public List<TipoTelefone> getListaTipoTelefone() {
-		listaTipoTelefone = tipoTelefoneService.buscarTodos();
-		return listaTipoTelefone;
+	public List<TipoTelefone> getListaTipoTelefones() {
+		listaTipoTelefones = tipoTelefoneService.buscarTodos();
+		return listaTipoTelefones;
 	}
 
 	public void salvar(){

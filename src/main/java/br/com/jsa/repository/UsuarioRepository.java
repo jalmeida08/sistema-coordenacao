@@ -11,6 +11,10 @@ public class UsuarioRepository {
 	@Inject
 	private EntityManager manager;
 
+	public Usuario getUsuario(Long idUsuario){
+		return manager.find(Usuario.class, idUsuario);
+	}
+	
 	public void salvar(Usuario usuario) {
 		manager.persist(usuario);
 	}
@@ -24,5 +28,12 @@ public class UsuarioRepository {
 		}catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	public void atualizarSenha(Usuario usuario, String novaSenha) {
+		Usuario user = getUsuario(usuario.getIdUsuario());
+		user.setSenha(novaSenha);
+		user.setSenhaAleatoria(false);
+		manager.merge(user);
 	}
 }
