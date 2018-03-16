@@ -9,18 +9,6 @@
 	<title>Insert title here</title>
 </h:head>
 <h:body>
-	<h:form>
-		<h:panelGrid columns="1" cellpadding="-10">
-			<p:outputLabel for="email" value="E-mail:" />
-			<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
-
-			<p:outputLabel for="senha" value="Senha:" />
-			<p:password id="senha" value="#{usuarioBean.usuario.senha}" />
-		</h:panelGrid>
-		<h:panelGrid columns="2" cellpadding="">
-			<p:commandButton action="#{usuarioBean.login()}" value="Logar" />
-			<p:commandButton action="#{usuarioBean.limpar()}" value="Limpar" update="@form" />
-		</h:panelGrid>
-	</h:form>
+	<h1>Home Page</h1>
 </h:body>
 </html>

@@ -10,6 +10,7 @@
 </h:head>
 <h:body>
 	<h:form>
+		<p:messages autoUpdate="true" showDetail="true" />
 		<h:panelGrid columns="1" cellpadding="-10">
 			<p:outputLabel for="email" value="E-mail:" />
 			<p:inputText id="email" value="#{usuarioBean.usuario.email}" />

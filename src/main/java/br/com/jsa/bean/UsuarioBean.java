@@ -39,7 +39,7 @@ public class UsuarioBean implements Serializable{
 		context = FacesContext.getCurrentInstance();
 		Usuario usuario = usuarioService.logar(this.usuario);
 		if (usuario == null) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Login ou senha inv√°lido"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "E-mail ou senha inv·lido"));
 			return null;
 		}
 		context.getExternalContext().getSessionMap().put("usuarioLogado", usuario);
