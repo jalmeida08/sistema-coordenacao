@@ -54,7 +54,7 @@ public class UsuarioBean implements Serializable{
 		context = FacesContext.getCurrentInstance();
 		Usuario usuario = usuarioService.logar(this.usuario);
 		if (usuario == null) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "E-mail ou senha inválido"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "E-mail ou senha invï¿½lido"));
 			return null;
 		}
 		context.getExternalContext().getSessionMap().put("usuarioLogado", usuario);
@@ -63,7 +63,7 @@ public class UsuarioBean implements Serializable{
 			return "/usuario/trocar-senha?faces-redirect=true";
 		}
 		
-		return "home?faces-redirect=true";
+		return "/home?faces-redirect=true";
 	}
 
 	public String atualizarSenha() {
@@ -77,10 +77,10 @@ public class UsuarioBean implements Serializable{
 			novaSenha = null;
 			confirmeSenha = null;
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Senha atualizada com sucesso."));
-			return "home?faces-redirect=true";
+			return "/home?faces-redirect=true";
 		}
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! ",
-				"Verifique a senha, deve conter no mínimo 8 digitos."));
+				"Verifique a senha, deve conter no mÃ­nimo 8 digitos."));
 		return "trocar-senha";
 
 	}	

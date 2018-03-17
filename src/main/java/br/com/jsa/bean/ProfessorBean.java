@@ -28,20 +28,14 @@ public class ProfessorBean implements Serializable{
 	@Inject
 	private TipoTelefoneService tipoTelefoneService;
 	@Inject
-	private PermissaoService permissaoService;
-	@Inject
 	private Professor professor;
 	@Inject
-	private Usuario Usuario;
-	@Inject
-	private Permissao permissao;
+	private Usuario usuario;
 	@Inject
 	private Telefone telefone;
 	@Inject
 	private TipoTelefone tipoTelefone;
 	private List<Telefone> telefones = new ArrayList<Telefone>();
-	private List<Permissao> permissoes;
-	private List<Permissao> listaPermissao;
 	private List<TipoTelefone> listaTipoTelefones;
 	
 	public Professor getProfessor() {
@@ -66,11 +60,7 @@ public class ProfessorBean implements Serializable{
 	}
 
 	public Usuario getUsuario() {
-		return Usuario;
-	}
-
-	public Permissao getPermissao() {
-		return permissao;
+		return usuario;
 	}
 
 	public Telefone getTelefone() {
@@ -85,21 +75,14 @@ public class ProfessorBean implements Serializable{
 		return telefones;
 	}
 
-	public List<Permissao> getPermissoes() {
-		return permissoes;
-	}
-
-	public List<Permissao> getListaPermissao() {
-		listaPermissao = permissaoService.buscarTodos();
-		return listaPermissao;
-	}
-
 	public List<TipoTelefone> getListaTipoTelefones() {
 		listaTipoTelefones = tipoTelefoneService.buscarTodos();
 		return listaTipoTelefones;
 	}
 
 	public void salvar(){
+		professor.setUsuario(usuario);
+		professor.setTelefone(telefones);
 		professorService.salvar(professor);
 	}
 	

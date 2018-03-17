@@ -7,7 +7,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import br.com.jsa.EnviarEmailDePrimeiroAcesso;
+import br.com.jsa.EnviarEmail;
 import br.com.jsa.GerarSenhas;
 import br.com.jsa.model.Vendedor;
 import br.com.jsa.repository.VendedorRepository;
@@ -30,10 +30,10 @@ public class VendedorService {
 		vendedor.getUsuario().setSenha(senha);
 		vendedor.getUsuario().setSenhaAleatoria(true);
 
-		EnviarEmailDePrimeiroAcesso enviarEmail = new EnviarEmailDePrimeiroAcesso(vendedor.getUsuario().getEmail(),
+		EnviarEmail enviarEmail = new EnviarEmail(vendedor.getUsuario().getEmail(),
 				senha);
 
-		if (enviarEmail.enviar() == false) {
+		if (enviarEmail.enviarEmailDePrimeiroAcesso() == false) {
 			throw new RuntimeException("Erro ai enviar o e-mail");
 		}
 		vendedorRepository.salvar(vendedor);

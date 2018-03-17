@@ -6,7 +6,7 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-public class EnviarEmailDePrimeiroAcesso {
+public class EnviarEmail {
 	
 	private String smtp = "smtp.gmail.com";
 	private String emailAuthenticator = "jeffersonemails08@gmail.com";
@@ -17,12 +17,12 @@ public class EnviarEmailDePrimeiroAcesso {
 	private String mensagem;
 	
 	
-	public EnviarEmailDePrimeiroAcesso(String enviarPara, String senha) {
+	public EnviarEmail(String enviarPara, String senha) {
 		this.enviarPara = enviarPara;
 		this.senha = senha;
 	}
 
-	public boolean enviar(){
+	public boolean enviarEmailDePrimeiroAcesso(){
 		mensagem = "Bem vindo!!! \n\n"
 				+ "A sua senha de primeiro acesso é:\n"
 				+ "E-mail: " + enviarPara
