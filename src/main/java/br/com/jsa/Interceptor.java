@@ -1,15 +1,11 @@
 package br.com.jsa;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import br.com.jsa.model.Permissao;
 import br.com.jsa.model.Usuario;
 
 public class Interceptor implements PhaseListener {
@@ -36,7 +32,7 @@ public class Interceptor implements PhaseListener {
 				Autorizacao autorizacao = new Autorizacao(usuarioLogado.getPermissao(), nomePagina);
 				return;
 			}catch (RuntimeException e) {
-				System.out.println("ERRO NA EXEXUÇÂO");
+				System.out.println("ERRO NA EXECUÃ‡ÃƒO");
 			}
 
 

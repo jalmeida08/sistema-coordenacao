@@ -18,7 +18,6 @@ public class Autorizacao {
 
 	public void percorrerLista() {
 		for (Permissao p : permissao) {
-			System.out.println("A PERMISSAO È: " + p.getDescricao());
 			chamarAutorizador(pagina, p);
 		}
 	}
@@ -49,22 +48,26 @@ public class Autorizacao {
 	}
 
 	public void autorizacaoProfessor(String pagina, Permissao permissao) {
-		if (!pagina.contains("/turma/professor/")) {
+		if ((!pagina.contains("/professor")) || pagina.contains("/usuarios/professor")) {
 			throw new RuntimeException();
 		}
 	}
 
 	public void autorizacaoAluno(String pagina, Permissao permissao) {
-		if ((!pagina.contains("/aluno")) || pagina.contains("/usuarioss")) {
+		if ((!pagina.contains("/aluno")) || pagina.contains("/usuarios/aluno")) {
 			throw new RuntimeException();
 		}
 	}
 
 	public void autorizacaoCoordenador(String pagina, Permissao permissao) {
-		throw new RuntimeException();
+		if (!pagina.contains("/administrator")) {
+			throw new RuntimeException();
+		}
 	}
 
 	public void autorizacaoVendedor(String pagina, Permissao permissao) {
-		throw new RuntimeException();
+		if ((!pagina.contains("/vendedor")) || pagina.contains("/usuario/vendedor")) {
+			throw new RuntimeException();
+		}
 	}
 }

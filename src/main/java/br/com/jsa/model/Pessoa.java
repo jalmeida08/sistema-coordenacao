@@ -32,7 +32,7 @@ public abstract class Pessoa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	
