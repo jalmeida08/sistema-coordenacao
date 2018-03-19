@@ -27,11 +27,11 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private boolean senhaAleatoria;
-	@OneToOne(orphanRemoval = false)
+	@OneToOne(fetch=FetchType.LAZY ,orphanRemoval = false)
 	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="usuario_permissao",
 		joinColumns = {@JoinColumn(name="idUsuario", referencedColumnName="idUsuario")},
 		inverseJoinColumns = {@JoinColumn (name="idPermissao", referencedColumnName="idPermissao")})
