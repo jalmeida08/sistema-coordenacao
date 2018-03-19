@@ -55,7 +55,7 @@ public class Autorizacao {
 	}
 
 	public void autorizacaoAluno(String pagina, Permissao permissao) {
-		if ((!pagina.contains("/aluno")) || pagina.contains("")) {
+		if ((!pagina.contains("/aluno")) || pagina.contains("/usuarioss")) {
 			throw new RuntimeException();
 		}
 	}
