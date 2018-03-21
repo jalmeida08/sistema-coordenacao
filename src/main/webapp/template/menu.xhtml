@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/estilo.css" media="screen" />
+	
+	<title>Sistema de coordenacação .:: JSA</title>
 </h:head>
 <h:body>
 	<h:form>
-		<h:form>
 			<p:menubar>
-				<p:submenu label="Proprietário">
-					<p:menuitem value="Cadastrar" url="#" />
-					<p:menuitem value="Listar proprietários" url="#" />
+				<p:submenu label="Vendedor" rendered="#{usuarioLogado != null}">
+					<p:menuitem value="Cadastrar" url="/coordenador/vendedor/form.jsf" />
+					<p:menuitem value="Vendedores" url="/coordenador/vendedor/lista-de-vendedores.jsf" />
+					
 				</p:submenu>
 			</p:menubar>
-		</h:form>
-		<ui:insert name="body"></ui:insert>
-
 	</h:form>
+		<ui:insert name="body">
+		</ui:insert>
 </h:body>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import br.com.jsa.model.Telefone;
 import br.com.jsa.model.Usuario;
@@ -33,15 +34,43 @@ public class VendedorRepository {
 	}
 
 	public List<Vendedor> buscarTodosVendedores() {
-		return manager.createQuery("select v from Vendedor v", Vendedor.class).getResultList();
+		return manager.createQuery("select v from Vendedor v order by v.nome asc", Vendedor.class).getResultList();
 	}
 
 	public void atualizar(Vendedor vendedor) {
-		manager.merge(vendedor);
+		Vendedor v = getVendedor(vendedor.getIdPessoa());
+		List<Telefone> list = vendedor.getTelefone();
+		
+		v.getTelefone().clear();
+		
+		manager.flush();
+		if(list.size() >= 1) {
+			for (Telefone t : list) {
+				t.setPessoa(v);
+			}
+		}
+		
+		
+		v.setNome(vendedor.getNome());
+		v.setDataNascimento(vendedor.getDataNascimento());
+		v.setUsuario(vendedor.getUsuario());
+		v.setTelefone(list);
+		
+		manager.merge(v);
 	}
 
 	public void remover(Vendedor vendedor) {
 		manager.remove(vendedor);
+	}
+
+	public Vendedor detalheVendedor(Long idPessoa) {
+		try {
+			return manager.createQuery("select v from Vendedor v join br.com.jsa.model.Usuario u on u.idPessoa = v.idPessoa where v.idPessoa = :idPessoa", Vendedor.class)
+			.setParameter("idPessoa", idPessoa)
+			.getSingleResult();
+		}catch(NoResultException e) {
+			return null;
+		}
 	}
 
 }

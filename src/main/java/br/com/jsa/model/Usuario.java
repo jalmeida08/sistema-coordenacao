@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private boolean senhaAleatoria;
-	@OneToOne(fetch=FetchType.LAZY ,orphanRemoval = false)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
 

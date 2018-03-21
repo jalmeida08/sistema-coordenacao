@@ -17,57 +17,68 @@ public class Autorizacao {
 	}
 
 	public void percorrerLista() {
+		List<Boolean> checarPermissao = new ArrayList<Boolean>();
 		for (Permissao p : permissao) {
-			chamarAutorizador(pagina, p);
+			checarPermissao.add(chamarAutorizador(pagina, p));
 		}
+		if (!checarPermissao.contains(true)) {
+			throw new RuntimeException();
+		}
+
 	}
 
-	public void chamarAutorizador(String pagina, Permissao permissao) {
+	public boolean chamarAutorizador(String pagina, Permissao permissao) {
 		if (permissao.getDescricao().equals("administrador")) {
-			autorizacaoAdministrador(pagina, permissao);
+			return autorizacaoAdministrador(pagina, permissao);
 		}
 		if (permissao.getDescricao().equals("vendedor")) {
-			autorizacaoVendedor(pagina, permissao);
+			return autorizacaoVendedor(pagina, permissao);
 		}
 		if (permissao.getDescricao().equals("aluno")) {
-			autorizacaoAluno(pagina, permissao);
+			return autorizacaoAluno(pagina, permissao);
 		}
-		if (permissao.getDescricao().equals("coordenacao")) {
-			autorizacaoCoordenador(pagina, permissao);
+		if (permissao.getDescricao().equals("coordenador")) {
+			return autorizacaoCoordenador(pagina, permissao);
 		}
 		if (permissao.getDescricao().equals("professor")) {
-			autorizacaoProfessor(pagina, permissao);
+			return autorizacaoProfessor(pagina, permissao);
 		}
+		return false;
 
 	}
 
-	public void autorizacaoAdministrador(String pagina, Permissao permissao) {
-		if (!pagina.contains("/")) {
-			throw new RuntimeException();
+	public boolean autorizacaoAdministrador(String pagina, Permissao permissao) {
+		if (!pagina.startsWith("/")) {
+			return false;
 		}
+		return true;
 	}
 
-	public void autorizacaoProfessor(String pagina, Permissao permissao) {
-		if ((!pagina.contains("/professor")) || pagina.contains("/usuarios/professor")) {
-			throw new RuntimeException();
+	public boolean autorizacaoProfessor(String pagina, Permissao permissao) {
+		if ((!pagina.startsWith("/professor")) || pagina.startsWith("/usuarios/professor")) {
+			return false;
 		}
+		return true;
 	}
 
-	public void autorizacaoAluno(String pagina, Permissao permissao) {
-		if ((!pagina.contains("/aluno")) || pagina.contains("/usuarios/aluno")) {
-			throw new RuntimeException();
+	public boolean autorizacaoAluno(String pagina, Permissao permissao) {
+		if ((!pagina.startsWith("/aluno")) || pagina.startsWith("/usuarios/aluno")) {
+			return false;
 		}
+		return true;
 	}
 
-	public void autorizacaoCoordenador(String pagina, Permissao permissao) {
-		if (!pagina.contains("/administrator")) {
-			throw new RuntimeException();
+	public boolean autorizacaoCoordenador(String pagina, Permissao permissao) {
+		if (!pagina.startsWith("/coordenador/")) {
+			return false;
 		}
+		return true;
 	}
 
-	public void autorizacaoVendedor(String pagina, Permissao permissao) {
-		if ((!pagina.contains("/vendedor")) || pagina.contains("/usuario/vendedor")) {
-			throw new RuntimeException();
+	public boolean autorizacaoVendedor(String pagina, Permissao permissao) {
+		if ((!pagina.startsWith("/vendedor/")) || pagina.startsWith("/usuario/vendedor")) {
+			return false;
 		}
+		return true;
 	}
 }

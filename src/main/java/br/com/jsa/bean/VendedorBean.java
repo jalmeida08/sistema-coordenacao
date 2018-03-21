@@ -21,16 +21,16 @@ import br.com.jsa.service.VendedorService;
 
 @Named("vendedorBean")
 @SessionScoped
-public class VendedorBean implements Serializable{
-	
+public class VendedorBean implements Serializable {
+
 	private static final long serialVersionUID = -5460821205129034444L;
-	
+
 	@Inject
 	private VendedorService vendedorService;
 	@Inject
 	private TipoTelefoneService tipoTelefoneService;
 	@Inject
-	private PermissaoService permissaoService; 
+	private PermissaoService permissaoService;
 	@Inject
 	private Vendedor vendedor;
 	@Inject
@@ -44,39 +44,40 @@ public class VendedorBean implements Serializable{
 	private List<Permissao> permissoes = new ArrayList<Permissao>();;
 	private List<TipoTelefone> listaTipoTelefones = new ArrayList<TipoTelefone>();
 	private List<Permissao> listaPermissoes = new ArrayList<Permissao>();
+	private List<Vendedor> todosVendedores = new ArrayList<Vendedor>();
 
-	
 	public void adicionarTelefone() {
-		if(telefone.getTipoTelefone() != null) {
-			if(telefones.contains(telefone)) {
+		if (telefone.getTipoTelefone() != null) {
+			if (telefones.contains(telefone)) {
 				telefones.remove(telefone);
 			}
 			telefones.add(telefone);
 			telefone = new Telefone();
 		}
 	}
-	
+
 	public void adicionarPermissao() {
 		permissoes.add(permissao);
 		permissao = new Permissao();
-		
+
 	}
-	
+
 	public void removerTelefoneList(Telefone telefone) {
 		telefones.remove(telefone);
 	}
+
 	public void removerPermissao(Permissao permissao) {
 		permissoes.remove(permissao);
 	}
-	
-	public void capturarTelefoneList(Telefone telefone){
+
+	public void capturarTelefoneList(Telefone telefone) {
 		this.telefone = telefone;
 	}
-	
+
 	public Vendedor getVendedor() {
 		return vendedor;
 	}
-	
+
 	public Permissao getPermissao() {
 		return permissao;
 	}
@@ -105,7 +106,7 @@ public class VendedorBean implements Serializable{
 		listaTipoTelefones = tipoTelefoneService.buscarTodos();
 		return listaTipoTelefones;
 	}
-	
+
 	public List<Permissao> getListaPermissoes() {
 		listaPermissoes = permissaoService.buscarTodos();
 		return listaPermissoes;
@@ -115,14 +116,53 @@ public class VendedorBean implements Serializable{
 		usuario.setPermissao(permissoes);
 		vendedor.setUsuario(usuario);
 		vendedor.setTelefone(telefones);
+		
 		vendedorService.salvar(vendedor);
+		
 		vendedor = new Vendedor();
 		telefones = new ArrayList<Telefone>();
 		usuario = new Usuario();
 		permissoes = new ArrayList<Permissao>();
+		
 		context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Salvo com sucesso"));
 		return "form?faces-redirect=true";
 	}
+
+	public List<Vendedor> getTodosVendedores() {
+		todosVendedores = vendedorService.buscarTodosVendedores();
+		return todosVendedores;
+	}
+
+	public String editar(Vendedor vendedor) {
+		this.vendedor = vendedor;
+		this.telefones = vendedor.getTelefone();
+		this.usuario = vendedor.getUsuario();
+		this.permissoes = vendedor.getUsuario().getPermissao();
+		return "editar?faces-redirect=true";
+	}
+
+	public String atualizar() {
+		usuario.setPermissao(permissoes);
+		vendedor.setUsuario(usuario);
+		vendedor.setTelefone(telefones);
+		
+		vendedorService.atualizar(vendedor);
+		
+		vendedor = new Vendedor();
+		telefones = new ArrayList<Telefone>();
+		usuario = new Usuario();
+		permissoes = new ArrayList<Permissao>();
+		return "form?faces-redirect=true";
+	}
 	
+	public void remover(Vendedor vendedor) {
+		vendedorService.remover(vendedor);
+	}
+
+	public String detalheVendedor(Vendedor vendedor) {
+		vendedor = vendedorService.detalheVendedor(vendedor.getIdPessoa());
+		return "detalhe-cliente?faces-redirect=true";
+	}
+
 }

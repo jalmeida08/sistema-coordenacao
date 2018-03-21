@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Permissao implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idPermissao;
 	private String descricao;
-	@ManyToMany(mappedBy="permissao")
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="permissao")
 	private List<Usuario> usuario = new ArrayList<Usuario>();
 	
 	@Version

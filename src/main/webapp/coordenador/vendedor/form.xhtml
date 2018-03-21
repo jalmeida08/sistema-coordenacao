@@ -1,11 +1,13 @@
 <ui:composition template="/template/menu.xhtml" 
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 	<ui:define name="body">
-	<h:form rendered="#{usuarioLogado != null}">
+	
+	<!-- rendered="#{usuarioLogado != null}" -->
+	<h:form > 
 		<p:panel header="Vendedor">
 			<p:messages autoUpdate="true" showDetail="true" closable="true" />
 			<div class="ui-g">

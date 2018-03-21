@@ -1,0 +1,30 @@
+<ui:composition template="/template/menu.xhtml"
+xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:define name="body">
+
+		<h:form>
+			<p:dataTable var="vendedor" value="#{vendedorBean.todosVendedores}">
+				<p:column headerText="Nome">
+					<h:commandLink actionListener="#{vendedorBean.detalheVendedor(vendedor)}"  value="#{vendedor.nome}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{vendedor.usuario.email}" />
+				</p:column>
+				<p:column headerText="Data de nascimento">
+					<h:outputText value="#{vendedor.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="#">
+					<p:commandButton icon="ui-icon-pencil" action="#{vendedorBean.editar(vendedor)}" />
+					<p:commandButton icon="ui-icon-trash" action="#{vendedorBean.remover(vendedor)}" update="@form"/>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

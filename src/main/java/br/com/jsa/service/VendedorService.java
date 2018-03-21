@@ -44,4 +44,18 @@ public class VendedorService {
 		return vendedorRepository.buscarTodosVendedores();
 	}
 
+	public void remover(Vendedor vendedor) {
+		vendedorRepository.remover(vendedor);
+		
+	}
+
+	public Vendedor detalheVendedor(Long idPessoa) {
+		return vendedorRepository.detalheVendedor(idPessoa);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void atualizar(Vendedor vendedor) {
+		vendedorRepository.atualizar(vendedor);
+	}
+
 }
