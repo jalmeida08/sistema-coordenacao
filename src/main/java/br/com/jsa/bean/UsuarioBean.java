@@ -58,6 +58,7 @@ public class UsuarioBean implements Serializable{
 			return null;
 		}
 		context.getExternalContext().getSessionMap().put("usuarioLogado", usuario);
+
 		if(usuarioService.checarSenhaAleatoria(usuario)){
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta!", "Bem vindo! por favor, crie uma nova senha"));
 			return "/usuario/trocar-senha?faces-redirect=true";

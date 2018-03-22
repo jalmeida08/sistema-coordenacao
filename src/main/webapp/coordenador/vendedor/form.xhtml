@@ -18,7 +18,7 @@
 							<p:inputText id="nome" value="#{vendedorBean.vendedor.nome}" />
 				
 							<p:outputLabel for="dtNascimento" value="Data de nascimento:" />
-							<p:calendar id="dtNascimento" value="#{vendedorBean.vendedor.dataNascimento}"  />
+							<p:calendar id="dtNascimento" value="#{vendedorBean.vendedor.dataNascimento}" pattern="dd/MM/yyyy"/>
 						</h:panelGrid>
 					</p:fieldset>
 				</div>
@@ -61,8 +61,8 @@
 	    			</div>
 	    	</div>
 			<div class="ui-g">
-				<p:fieldset legend="Contato">
-		    		<div class="ui-g-12 ui-md-6 ui-lg-6">
+	    		<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:fieldset legend="Contato">
 						<h:panelGrid columns="2">	
 							<p:outputLabel for="ddd" value="DDD" />
 							<p:inputText id="ddd" value="#{vendedorBean.telefone.ddd}"/>
@@ -80,6 +80,7 @@
 							<p:commandButton action="#{vendedorBean.adicionarTelefone()}" value="Adicionar" update="@form"/>
 							<p:commandButton action="#{vendedorBean.salvar()}" value="Salvar" update="@form"/>
 						</h:panelGrid>
+					</p:fieldset>
 					</div>
 			    	<div class="ui-g-12 ui-md-6 ui-lg-6">
 						<p:dataTable var="telefone" value="#{vendedorBean.telefones}" emptyMessage="Não á telefones cadastrado">
@@ -104,9 +105,8 @@
 									</p:commandButton>
 								</p:column>
 						</p:dataTable>
-	    			</div>
-				</p:fieldset>
-	    	</div>
+    				</div>
+   			</div>
 	    </p:panel>
 	</h:form>
 </ui:define>

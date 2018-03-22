@@ -29,56 +29,56 @@ public class Autorizacao {
 
 	public boolean chamarAutorizador(String pagina, Permissao permissao) {
 		if (permissao.getDescricao().equals("administrador")) {
-			return autorizacaoAdministrador(pagina, permissao);
+			return autorizacaoAdministrador(pagina);
 		}
 		if (permissao.getDescricao().equals("vendedor")) {
-			return autorizacaoVendedor(pagina, permissao);
+			return autorizacaoVendedor(pagina);
 		}
 		if (permissao.getDescricao().equals("aluno")) {
-			return autorizacaoAluno(pagina, permissao);
+			return autorizacaoAluno(pagina);
 		}
 		if (permissao.getDescricao().equals("coordenador")) {
-			return autorizacaoCoordenador(pagina, permissao);
+			return autorizacaoCoordenador(pagina);
 		}
 		if (permissao.getDescricao().equals("professor")) {
-			return autorizacaoProfessor(pagina, permissao);
+			return autorizacaoProfessor(pagina);
 		}
 		return false;
 
 	}
 
-	public boolean autorizacaoAdministrador(String pagina, Permissao permissao) {
-		if (!pagina.startsWith("/")) {
-			return false;
+	public boolean autorizacaoAdministrador(String pagina) {
+		if (pagina.startsWith("/")) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
-	public boolean autorizacaoProfessor(String pagina, Permissao permissao) {
-		if ((!pagina.startsWith("/professor")) || pagina.startsWith("/usuarios/professor")) {
-			return false;
+	public boolean autorizacaoProfessor(String pagina) {
+		if (pagina.startsWith("/professor") || pagina.startsWith("/usuario/")) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
-	public boolean autorizacaoAluno(String pagina, Permissao permissao) {
-		if ((!pagina.startsWith("/aluno")) || pagina.startsWith("/usuarios/aluno")) {
-			return false;
+	public boolean autorizacaoAluno(String pagina) {
+		if (pagina.startsWith("/aluno") || pagina.startsWith("/usuario/")) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
-	public boolean autorizacaoCoordenador(String pagina, Permissao permissao) {
-		if (!pagina.startsWith("/coordenador/")) {
-			return false;
+	public boolean autorizacaoCoordenador(String pagina) {
+		if (pagina.startsWith("/coordenador") || pagina.startsWith("/usuario")) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
-	public boolean autorizacaoVendedor(String pagina, Permissao permissao) {
-		if ((!pagina.startsWith("/vendedor/")) || pagina.startsWith("/usuario/vendedor")) {
-			return false;
+	public boolean autorizacaoVendedor(String pagina) {
+		if (pagina.startsWith("/vendedor/") || pagina.startsWith("/usuario/")) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 }
