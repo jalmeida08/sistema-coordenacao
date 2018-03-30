@@ -6,7 +6,15 @@
       xmlns:p="http://primefaces.org/ui">
 	<ui:define name="body">
 	<h:form > 
-		<h1>Novo curso</h1>
+		<h:panelGrid columns="2">
+			<p:outputLabel for="nomeCurso" value="Nome do curso" />
+			<p:inputText id="nomeCurso" value="#{cursoBean.curso.nomeCurso}" />
+
+			<p:outputLabel for="cargaHoraria" value="Carga horaria" />
+			<p:inputText id="cargaHoraria" value="#{cursoBean.curso.cargaHoraria}" />
+			
+			<p:commandButton value="Salvar" action="#{cursoBean.salvar()}" />
+		</h:panelGrid>
 	</h:form>
 </ui:define>
 </ui:composition>
